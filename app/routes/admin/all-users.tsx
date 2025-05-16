@@ -1,10 +1,17 @@
-import React from 'react'
-
+import { Header } from 'components'
+ 
 const AllUser = () => {
   return (
-    <div>
-      all user
-    </div>
+    <main className='dashboard wrapper'>
+      <Header 
+      //@ts-ignore
+      title={`Trip page`}
+      description = "check out our current user in real time " 
+      />
+
+      All user page content
+    </main>
+    
   )
 }
 
