@@ -38,7 +38,10 @@
   --color-red-50: #fff4ed;
   --color-red-100: #ff543d;
 
+  /* idea-1 : create an auth background according to winter(auth) and summer(auth2) */
+
   --background-image-auth: url("/assets/images/auth-img.webp");
+  --background-image-auth2:url("/assets/images/auth-img-2.png");
   --background-image-hero: url("/assets/images/hero-img.png");
   --background-image-card-1: url("/assets/images/card-img-1.png");
   --background-image-card-2: url("/assets/images/card-img-2.png");
@@ -109,8 +112,11 @@
       @apply flex flex-col gap-5 mt-2.5;
     }
   }
+
+
+
   .auth {
-    @apply w-full h-screen flex bg-auth bg-cover bg-no-repeat;
+    @apply w-full h-screen flex bg-auth2 bg-cover bg-no-repeat;
   }
 
   .payment-success {
@@ -477,7 +483,7 @@ body {
 }
 
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
