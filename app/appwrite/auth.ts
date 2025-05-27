@@ -6,7 +6,10 @@ import { redirect } from "react-router";
 
 export const loginWithGoogle = async () => {
   try {
-    account.createOAuth2Session(OAuthProvider.Google);
+    account.createOAuth2Session(OAuthProvider.Google,
+      'http://localhost:5173/dashboard',
+      'http://localhost:3000/login-failed',
+    );
   } catch (error) {
     console.log("loginWithGoogle error :", error);
   }

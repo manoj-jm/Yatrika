@@ -18,4 +18,4 @@ const account = new Account(client) // for login , signup,logout
 const database = new Databases(client)// for interact with collection
 const storage = new Storage(client) // for file upload and download
 
-export { client , account,database,storage} ;
+export { client,account,database,storage } ;
