@@ -4,17 +4,30 @@ import { ID, OAuthProvider, Query } from "appwrite";
 import { account, appwriteconfig, database } from "./client";
 import { redirect } from "react-router";
 
-export const loginWithGoogle = async () => {
-  try {
-    account.createOAuth2Session(OAuthProvider.Google,
-      'http://localhost:5173/dashboard',
-      'http://localhost:3000/login-failed',
-    );
-  } catch (error) {
-    console.log("loginWithGoogle error :", error);
-  }
-};
+// export const loginWithGoogle = async () => {
+//   try {
+//     account.createOAuth2Session(OAuthProvider.Google,
+//       'http://localhost:5173/dashboard',
+//       'http://localhost:3000/login-failed',
+//     );
+//   } catch (error) {
+//     console.log("loginWithGoogle error :", error);
+//   }
+// };
 
+
+export const loginWithGoogle = async () => {
+    try {
+        account.createOAuth2Session(
+            OAuthProvider.Google,
+            `${window.location.origin}/`,
+            `${window.location.origin}/404`
+        );
+        alert("google logined ")
+    } catch (error) {
+        console.error("Error during OAuth2 session creation:", error);
+    }
+};
 export const getUser = async () => {
   try {
     const user = await account.get();
@@ -29,7 +42,7 @@ export const getUser = async () => {
     );
     console.log("documents", documents);
   } catch (error) {
-    console.log("loginWithGoogle error :", error);
+    console.log("getUser error :", error);
   }
 };
 
@@ -38,7 +51,7 @@ export const logoutUser = async () => {
     await account.deleteSession("current");
     return true;
   } catch (error) {
-    console.log("loginWithGoogle error :", error);
+    console.log("logoutUser error :", error);
   }
 };
 
@@ -76,7 +89,7 @@ export const getGooglePicture = async () => {
 
     return photoUrl;
   } catch (error) {
-    console.log("loginWithGoogle error :", error);
+    console.log("getGooglePicture error :", error);
   }
 };
 
@@ -110,26 +123,21 @@ export const storeUserData = async () => {
     );
     return newUser;
   } catch (error) {
-    console.log("loginWithGoogle error :", error);
+    console.log("storeUserData error :", error);
   }
 };
 
-export const getExistingUser = async () => {
-  try {
-    const user = await account.get();
-    if (!user) {
-      console.log("getExistingUser error : user not found !");
-      return null;
-    }
-    const { documents } = await database.listDocuments(
-      appwriteconfig.databaseId,
-      appwriteconfig.usersCollectionId,
-      [Query.equal("accountId", user.$id)]
-    );
-    if (documents.length === 0) return null;
 
-    return documents[0];
-  } catch (error) {
-    console.log("loginWithGoogle error :", error);
-  }
+export const getExistingUser = async (id: string) => {
+    try {
+        const { documents, total } = await database.listDocuments(
+            appwriteconfig.databaseId,
+            appwriteconfig.usersCollectionId,
+            [Query.equal("accountId", id)]
+        );
+        return total > 0 ? documents[0] : null;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return null;
+    }
 };
