@@ -42,8 +42,10 @@ export const storeUserData = async () => {
       }
     );
     console.log("User created in database:", createdUser);
+    return createdUser; // Return the created user document
   } catch (error) {
     console.error("Error storing user data:", error);
+    return null;
   }
 };
 
@@ -102,7 +104,7 @@ export const getUser = async () => {
       //user authenticated but not in db , store user data
       return await storeUserData();
     }
-    console.log("getuser : ",documents[0])
+    // console.log("getuser : ",documents[0])
     return documents.length > 0 ? documents[0] : redirect("/sign-in");
   } catch (error) {
     console.error("Error fetching user:", error);

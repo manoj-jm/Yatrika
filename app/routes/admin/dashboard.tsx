@@ -1,12 +1,19 @@
 import { Header, StatsCards, TripCards } from "components";
-import { useLoaderData } from "react-router";
-// import { getUser } from "~/appwrite/auth";
+import { getUser } from "~/appwrite/auth";
 import { dashboardStats, user, allTrips } from "~/constants";
+import type { Route } from "./+types/dashboard";
 
-const Dashboard = async () => {
-const user = useLoaderData();
-// const user = await getUser();
-// console.log("in dashboard User : ", user);
+const {totalUsers , userJoined,totalTrips,tripsCreated , userRole} = dashboardStats;
+export const clientLoader = async () => await getUser(); 
+
+
+// export async function loader() {
+//   throw new Error("some error thrown in a loader");
+// }
+
+
+const Dashboard = ({ loaderData }: Route.ComponentProps) => {
+ const user = loaderData as User | null;
 
   return (
     <main className="dashboard wrapper">
@@ -15,8 +22,7 @@ const user = useLoaderData();
         title={`Welcome ${user?.name ?? "user"} 👋`}
         description="Track activities , trends and popular destination"
       />
-      
-      
+
       <section className="flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           <StatsCards
