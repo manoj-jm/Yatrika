@@ -1,7 +1,13 @@
 import { Header, StatsCards, TripCards } from "components";
+import { useLoaderData } from "react-router";
+// import { getUser } from "~/appwrite/auth";
 import { dashboardStats, user, allTrips } from "~/constants";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+const user = useLoaderData();
+// const user = await getUser();
+// console.log("in dashboard User : ", user);
+
   return (
     <main className="dashboard wrapper">
       <Header
@@ -9,7 +15,8 @@ const Dashboard = () => {
         title={`Welcome ${user?.name ?? "user"} 👋`}
         description="Track activities , trends and popular destination"
       />
-
+      
+      
       <section className="flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           <StatsCards

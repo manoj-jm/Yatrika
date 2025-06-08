@@ -1,13 +1,17 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLoaderData, useNavigate } from "react-router";
+import { logoutUser } from "~/appwrite/auth";
 import { sidebarItems } from "~/constants";
 import { cn } from "~/lib/utils";
 
 const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
-  const user = {
-    name: "manoj",
-    email: "jmanjjmvr@gmail.com",
-    imgUrl: "/assets/images/david.webp",
-  };
+  const user = useLoaderData() // this will get the data form loader function of the nearest router 
+  const navigate = useNavigate();
+
+ const handleLogout = async ()=>{
+  await logoutUser();
+  navigate('/sign-in')
+ }
+
   return (
     <section className="nav-items">
       <Link to="/" className="link-logo">
@@ -52,7 +56,7 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
           </article>
 
           <button
-            onClick={() => console.log("log out")}
+            onClick={handleLogout}
             className="cursor-pointer"
           >
             <img
