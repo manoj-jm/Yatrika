@@ -16,7 +16,7 @@ export const loader = async () => {
     openStreetMap: country.maps?.openStreetMap,
   }));
 
-  mapped.sort((a:any, b:any) => a.name.localeCompare(b.name));
+  mapped.sort((a: any, b: any) => a.name.localeCompare(b.name));
   return mapped;
 };
 
@@ -32,6 +32,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     value: country.value,
     flag: country.flag, // ✅ Add flag
   }));
+  console.log(" country data : ", countryData);
 
   return (
     <main className="flex flex-col gap-10 pb-20 wrapper">
@@ -59,6 +60,8 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                   <span>{data.text}</span>
                 </div>
               )}
+              allowCustom={true} // ✅ Prevents typing random text
+              showClearButton={true}
               valueTemplate={(data: any) => (
                 <div className="flex flex-row items-center">
                   <img
@@ -74,9 +77,6 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                   handleChange("country", e.value);
                 }
               }}
-              allowCustom={true} // ✅ Prevents typing random text
-              
-              showClearButton={true}
               allowFiltering
               filtering={(e) => {
                 const query = e.text.toLowerCase();
@@ -85,11 +85,11 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                     .filter((country) =>
                       country.name.toLowerCase().includes(query)
                     )
-                    .map(((country) => ({
+                    .map((country) => ({
                       text: country.name,
                       value: country.value,
                       flag: country.flag,
-                    })))
+                    }))
                 );
               }}
             />
