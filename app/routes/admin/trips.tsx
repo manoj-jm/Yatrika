@@ -1,9 +1,17 @@
+import { Header } from "components"
 
 const Trips = () => {
   return (
-    <div>
-      trip
-    </div>
+     <main className="all-users wrapper">
+      <Header
+        //@ts-ignore
+        title={`Trips`}
+        description="view and edite AI-generator travel plans "
+        ctaText="create a trip"
+        ctaUrl="./create"
+      />
+      </main>
+
   )
 }
 
