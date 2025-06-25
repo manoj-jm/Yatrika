@@ -2,7 +2,16 @@ import { ComboBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import { Header } from "components";
 import type { Route } from "./+types/create-trip";
 import { comboBoxItems, selectItems } from "~/constants";
-import { formatKey } from "~/lib/utils";
+import { cn, formatDate, formatKey } from "~/lib/utils";
+import {
+  LayerDirective,
+  LayersDirective,
+  MapsComponent,
+} from "@syncfusion/ej2-react-maps";
+import { useState } from "react";
+import { world_map } from "~/constants/world_map";
+import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
+import { account } from "~/appwrite/client";
 
 export const loader = async () => {
   const response = await fetch(
@@ -23,17 +32,80 @@ export const loader = async () => {
 };
 
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
-  const handleSubmit = async () => {};
-  const handleChange = (key: keyof TripFormData, value: String | number) => {};
-
   const countries = (loaderData ?? []) as Country[];
   // console.log(countries);
+
+  const [formData, setFormData] = useState<TripFormData>({
+    country: countries[101]?.name || "",
+    travelStyle: "",
+    interest: "",
+    budget: "",
+    duration: 0,
+    groupType: "",
+  });
+  // console.log(formData.country)
+
+  const [Error, setError] = useState<String | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (
+      !formData.country ||
+      !formData.travelStyle ||
+      !formData.duration ||
+      !formData.interest ||
+      !formData.budget ||
+      !formData.groupType
+    ) {
+      setError("Please provide value for all fields");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.duration < 1 || formData.duration > 10) {
+      setError("Duration must be between 1 and 10 days");
+      setLoading(false);
+      return;
+    }
+    const user = await account.get();
+    if (!user.$id) {
+      console.log("User is not authenticate");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      console.log("user : ", user);
+      console.log("formData : ", formData);
+    } catch (error) {
+      console.log("Error Generating Trip : ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleChange = (key: keyof TripFormData, value: String | number) => {
+    setFormData({ ...formData, [key]: value });
+  };
 
   const countryData = countries.map((country) => ({
     text: country.name,
     value: country.value,
     flag: country.flag, // ✅ Add flag
   }));
+
+  const mapData = [
+    {
+      country: formData.country,
+      color: "#211dff",
+      coordinates:
+        // @ts-ignore
+        countries.find((c: Country) => c.name === formatDate.country)
+          ?.coordinates || [],
+    },
+  ];
 
   return (
     <main className="flex flex-col gap-10 pb-20 wrapper">
@@ -101,6 +173,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
             <input
               id="duration"
               name="duration"
+              type="number"
               placeholder="Enter the number of days "
               className="form-input placeholder:text-gray-100"
               onChange={(e) => handleChange("duration", Number(e.target.value))}
@@ -141,6 +214,48 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
               />
             </div>
           ))}
+
+          {/*  map element :  */}
+          <div>
+            <label htmlFor="location">Location on the World Map</label>
+            <MapsComponent>
+              <LayersDirective>
+                <LayerDirective
+                  shapeData={world_map}
+                  dataSource={mapData}
+                  shapePropertyPath="name"
+                  shapeDataPath="country"
+                  shapeSettings={{ colorValuePath: "color", fill: "#e5e5e5" }}
+                />
+              </LayersDirective>
+            </MapsComponent>
+          </div>
+
+          <div className="bg-gray-200 h-px w-full" />
+
+          {Error && (
+            <div className="error">
+              <p>{Error}</p>
+            </div>
+          )}
+          <footer className="px-6 w-full">
+            <ButtonComponent
+              type="submit"
+              className="button-class !h-12 !w-full"
+              disabled={loading}
+            >
+              <img
+                src={`/assets/icons/${
+                  loading ? "loader.svg" : "magic-star.svg"
+                }`}
+                className={cn("size-5", { "animate-spin": loading })}
+                alt="img"
+              />
+              <span className="p-16-semibold text-white">
+                {loading ? "Generating..." : "Generate Trip"}
+              </span>
+            </ButtonComponent>
+          </footer>
         </form>
       </section>
     </main>
