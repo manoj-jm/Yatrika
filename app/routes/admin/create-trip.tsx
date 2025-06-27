@@ -12,6 +12,7 @@ import { useState } from "react";
 import { world_map } from "~/constants/world_map";
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 import { account } from "~/appwrite/client";
+import { useNavigate } from "react-router";
 
 export const loader = async () => {
   const response = await fetch(
@@ -34,6 +35,7 @@ export const loader = async () => {
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const countries = (loaderData ?? []) as Country[];
   // console.log(countries);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<TripFormData>({
     country: countries[101]?.name || "",
@@ -43,7 +45,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     duration: 0,
     groupType: "",
   });
-  // console.log(formData.country)
+  console.log(formData);
 
   const [Error, setError] = useState<String | null>(null);
   const [loading, setLoading] = useState(false);
@@ -78,8 +80,30 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     }
 
     try {
-      console.log("user : ", user);
-      console.log("formData : ", formData);
+      const response = await fetch("/api/create-trip", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          country: formData.country,
+          numberOfDays: formData.duration,
+          travelStyle: formData.travelStyle,
+          interests: formData.interest,
+          budget: formData.budget,
+          groupType: formData.groupType,
+          userId: user.$id,
+        }),
+      });
+
+      const result: CreateTripResponse = await response.json();
+
+      if (result?.id) {
+        navigate(`/trips/${result.id}`);
+        console.log("we are navigated to id page!")
+      } else {
+        console.log("failed to generate trip");
+      }
     } catch (error) {
       console.log("Error Generating Trip : ", error);
     } finally {
@@ -173,7 +197,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
             <input
               id="duration"
               name="duration"
-              type="number"
+              type="Number"
               placeholder="Enter the number of days "
               className="form-input placeholder:text-gray-100"
               onChange={(e) => handleChange("duration", Number(e.target.value))}

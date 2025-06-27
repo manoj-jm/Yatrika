@@ -64,7 +64,7 @@ declare interface Trip {
   duration: number;
   budget: string;
   travelStyle: string;
-  interests: string;
+  interest: string;
   groupType: string;
   country: string;
   imageUrls: string[];

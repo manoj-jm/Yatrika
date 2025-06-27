@@ -8,12 +8,6 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
   const navigate = useNavigate();
   // console.log("in navitems user : ", user);
   if (user) {
-    // console.log("User Details:");
-    // console.log("Name:", user.name);
-    // console.log("Email:", user.email);
-    // console.log("Image URL:", user.imgUrl);
-    // console.log("ID:", user.id);
-    // console.log("Joined At:", user.joinedAt);
     console.log("user in navitem ");
   }
 

@@ -70,7 +70,7 @@ export const travelStyles = [
   "City Exploration",
 ];
 
-export const interests = [
+export const interest = [
   "Food & Culinary",
   "Historical Sites",
   "Hiking & Nature Walks",
@@ -98,7 +98,7 @@ export const selectItems = [
 export const comboBoxItems = {
   groupType: groupTypes,
   travelStyle: travelStyles,
-  interest: interests,
+  interest: interest,
   budget: budgetOptions,
 } as Record<keyof TripFormData, string[]>;
 
