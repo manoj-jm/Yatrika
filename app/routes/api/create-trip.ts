@@ -17,7 +17,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   } = await request.json();
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-  const unsplashApiKey = process.env.UNSPLASH_ACCESS_KEY!;
+  const unsplashApiKey = process.env.UNSPLASH_API_KEY!;
 
   try {
     const prompt = `Generate a ${numberOfDays}-day travel itinerary for ${country} based on the following user information:
@@ -79,11 +79,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
     // const imageUrl = (await imageResponse.json()).results.slice(0, 3)
     //     .map((result: any) => result.urls?.regular || null);
+    console.log("hello image 1 ")
+
     const imageResponse = await fetch(
       `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
     );
-
+    console.log("hello image 2")
     const imageJson = await imageResponse.json();
+    console.log("image JSON : ", imageJson)
     const imageResults = Array.isArray(imageJson.results)
       ? imageJson.results
       : [];
