@@ -1,6 +1,6 @@
 import { type ActionFunctionArgs, data } from "react-router";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { parseMarkdownToJson, parseTripData } from "~/lib/utils";
+import { parseMarkdownToJson } from "~/lib/utils";//parseTripData is removed 
 import { appwriteconfig, database } from "~/appwrite/client";
 import { ID } from "appwrite";
 // import {createProduct} from "~/lib/stripe";
@@ -72,19 +72,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       .generateContent([prompt]);
 
     const trip = parseMarkdownToJson(textResult.response.text());
-
-    // const imageResponse = await fetch(
-    //     `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
-    // );
-
-    // const imageUrl = (await imageResponse.json()).results.slice(0, 3)
-    //     .map((result: any) => result.urls?.regular || null);
-    console.log("hello image 1 ");
+    // console.log("hello image 1 ");
 
     const imageResponse = await fetch(
       `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
     );
-    console.log("hello image 2");
+    // console.log("hello image 2");
     const imageJson = await imageResponse.json();
     console.log("image JSON : ", imageJson);
     const imageResults = Array.isArray(imageJson.results)

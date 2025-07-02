@@ -105,8 +105,8 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             />
           ))}
         </section>
-        {/* trip description */}
-        <section className="flex gap-3 md:gap-5 items-center flex-wrap">
+        {/* trip Heading above */}
+        <section className="flex gap-2 md:gap-3 items-center flex-wrap">
           <ChipListComponent id="travel-chip">
             <ChipsDirective>
               {pillItems.map((pill, i) => (
@@ -127,7 +127,7 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
                   <img
                     src="/assets/icons/star.svg"
                     alt="star"
-                    className="size-5"
+                    className="size-4"
                   />
                 </li>
               ))}
@@ -156,6 +156,7 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
 
           <h2>{estimatedPrice}</h2>
         </section>
+        {/* trip description */}
 
         <p className="text-sm md:text-lg font-normal text-dark-400">
           {description}
