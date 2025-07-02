@@ -73,20 +73,20 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
     name: trip.name,
     interest: trip.interests,
   }));
-  const usersAndTrips = [
-    {
-      title: "Latest user signups",
-      dataSource: allUsers,
-      field: "count",
-      headerText: "Trips Created",
-    },
-    {
-      title: "Trips based on interests",
-      dataSource: trips,
-      field: "count",
-      headerText: "Trips Created",
-    },
-  ];
+   const usersAndTrips = [
+        {
+            title: 'Latest user signups',
+            dataSource: allUsers,
+            field: 'count',
+            headerText: 'Trips created'
+        },
+        {
+            title: 'Trips based on interests',
+            dataSource: trips,
+            field: 'interest',
+            headerText: 'Interests'
+        }
+    ]
 
   return (
     <main className="dashboard wrapper">
@@ -142,7 +142,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <ChartComponent
-          id="chat-1"
+          id="chart-1"
           primaryXAxis={userXAxis}
           primaryYAxis={useryAxis}
           title="User Growth"
@@ -173,14 +173,14 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
               yName="count"
               type="SplineArea"
               name="Wave"
-              fill="rgba(71,132,238,0.3)"
+               fill="rgba(71, 132, 238, 0.3)"
               border={{ width: 2, color: "#4784EE" }}
             />
           </SeriesCollectionDirective>
         </ChartComponent>
         {/* chart-2 */}
         <ChartComponent
-          id="chat-2"
+          id="chart-2"
           primaryXAxis={tripXAxis}
           primaryYAxis={tripyAxis}
           title="Trip Trends"
