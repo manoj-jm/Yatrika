@@ -142,6 +142,7 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             </li>
           </ul>
         </section>
+        {/* title */}
         <section className="title">
           <article>
             <h3>
@@ -152,22 +153,27 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             </p>
           </article>
 
-          <h2>{estimatedPrice}</h2>
+          <h2>estimated : {estimatedPrice}</h2>
         </section>
+
         <p className="text-sm md:text-lg font-normal text-dark-400">
           {description}
         </p>
+
+        {/* itinerary section  */}
         <ul className="itinerary">
           {itinerary?.map((dayplan: DayPlan, index: number) => (
             <li key={index}>
               <h3>
                 Day {dayplan.day}: {dayplan.location}
               </h3>
-              <ul>
+              <ul className="mt-2 space-y-2">
                 {dayplan.activities.map((activity, index: number) => (
-                  <li key={index}>
-                    <span className="flex-shring-0 p-18">{activity.time}</span>
-                    <p className="flex-grow">{activity.description}</p>
+                  <li key={index} className="flex gap-2 items-start">
+                    <span className="min-w-[95px] font-semibold text-dark-600 mr-3">
+                      {activity.time + " :"}
+                    </span>
+                    <p className="text-dark-400">{activity.description}</p>
                   </li>
                 ))}
               </ul>
@@ -190,23 +196,24 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             </div>
           </section>
         ))}
-
       </section>
-        <section className="flex flex-col gap-6">
-          <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
-          <div className="trip-grid ">
-            {allTrips.map((trip) => (
-              <TripCards
-                id={trip.id}
-                name={trip.name}
-                imageUrl={trip.imageUrls[0]}
-                location={trip.itinerary?.[0].location ?? "ntg"}
-                tags={[interest, travelStyle].filter((tag): tag is string => typeof tag === "string")}
-                price={estimatedPrice ?? ""}
-              />
-            ))}
-          </div>
-        </section>
+      <section className="flex flex-col gap-6">
+        <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
+        <div className="trip-grid ">
+          {allTrips.map((trip) => (
+            <TripCards
+              id={trip.id}
+              name={trip.name}
+              imageUrl={trip.imageUrls[0]}
+              location={trip.itinerary?.[0].location ?? "ntg"}
+              tags={[interest, travelStyle].filter(
+                (tag): tag is string => typeof tag === "string"
+              )}
+              price={estimatedPrice ?? ""}
+            />
+          ))}
+        </div>
+      </section>
     </main>
   );
 };
