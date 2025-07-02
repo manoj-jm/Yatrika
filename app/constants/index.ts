@@ -70,7 +70,7 @@ export const travelStyles = [
   "City Exploration",
 ];
 
-export const interest = [
+export const interests = [
   "Food & Culinary",
   "Historical Sites",
   "Hiking & Nature Walks",
@@ -91,14 +91,14 @@ export const footers = ["Terms & Condition", "Privacy Policy"];
 export const selectItems = [
   "groupType",
   "travelStyle",
-  "interest",
+  "interests",
   "budget",
 ] as (keyof TripFormData)[];
 
 export const comboBoxItems = {
   groupType: groupTypes,
   travelStyle: travelStyles,
-  interest: interest,
+  interests: interests,
   budget: budgetOptions,
 } as Record<keyof TripFormData, string[]>;
 
@@ -142,79 +142,80 @@ export const RIGHT_CONFETTI = {
   origin: { x: 1, y: 1 },
 };
 
-export const user = {name : "Manoj"}
+export const user = { name: "Manoj" };
 export const dashboardStats = {
-totalUsers:1230,
-userJoined : { currentMonth : 448, lastMonth : 782},
-totalTrips : 27,
-tripsCreated : {currentMonth : 12 , lastMonth : 15},
-userRole : {total : 62 , currentMonth : 25 , lastMonth : 15}
-}
-// dumy trips data 
-export const allTrips = [{
-  id: 1,
-  name: "Tropical Rewind",
-  imageUrls: ["/assets/images/sample1.jpg"],
-  itinerary: [{ location: "Thailand" }],
-  tags: ["Adventure", "Culture"],
-  travelStyle: "Solo",
-  estimatedPrice: "$1,000",
-},
-{
-  id: 2,
-  name: "French Reverie",
-  imageUrls: ["/assets/images/sample2.jpg"],
-  itinerary: [{ location: "Paris" }],
-  tags: ["Relaxation", "Culinary"],
-  travelStyle: "Family",
-  estimatedPrice: "$2,000",
-},
-{
-  id: 3,
-  name: "Zen Break",
-  imageUrls: ["/assets/images/sample3.jpg"],
-  itinerary: [{ location: "Japan" }],
-  tags: ["Shopping", "Luxury"],
-  travelStyle: "Couple",
-  estimatedPrice: "$3,000",
-},
-{
-  id: 4,
-  name: "Adventure in Westeros",
-  imageUrls: ["/assets/images/sample4.jpg"],
-  itinerary: [{ location: "Croatia" }],
-  tags: ["Historical", "Culture"],
-  travelStyle: "Friends",
-  estimatedPrice: "$4,000",
-},
+  totalUsers: 1230,
+  userJoined: { currentMonth: 448, lastMonth: 782 },
+  totalTrips: 27,
+  tripsCreated: { currentMonth: 12, lastMonth: 15 },
+  userRole: { total: 62, currentMonth: 25, lastMonth: 15 },
+};
+// dumy trips data
+export const allTrips = [
+  {
+    id: 1,
+    name: "Tropical Rewind",
+    imageUrls: ["/assets/images/sample1.jpg"],
+    itinerary: [{ location: "Thailand" }],
+    tags: ["Adventure", "Culture"],
+    travelStyle: "Solo",
+    estimatedPrice: "$1,000",
+  },
+  {
+    id: 2,
+    name: "French Reverie",
+    imageUrls: ["/assets/images/sample2.jpg"],
+    itinerary: [{ location: "Paris" }],
+    tags: ["Relaxation", "Culinary"],
+    travelStyle: "Family",
+    estimatedPrice: "$2,000",
+  },
+  {
+    id: 3,
+    name: "Zen Break",
+    imageUrls: ["/assets/images/sample3.jpg"],
+    itinerary: [{ location: "Japan" }],
+    tags: ["Shopping", "Luxury"],
+    travelStyle: "Couple",
+    estimatedPrice: "$3,000",
+  },
+  {
+    id: 4,
+    name: "Adventure in Westeros",
+    imageUrls: ["/assets/images/sample4.jpg"],
+    itinerary: [{ location: "Croatia" }],
+    tags: ["Historical", "Culture"],
+    travelStyle: "Friends",
+    estimatedPrice: "$4,000",
+  },
 ];
 
 export const users = [
-{
-  id: 1,
-  name: "John Doe",
-  email: "john.doe@example.com",
-  imageUrl: "/assets/images/david.webp",
-  dateJoined: formatDate("2025-01-01"),
-  itineraryCreated: 10,
-  status: "user",
-},
-{
-  id: 2,
-  name: "Jane Smith",
-  email: "jane.smith@example.com",
-  imageUrl: "/assets/images/david.webp",
-  dateJoined: formatDate("2025-01-02"),
-  itineraryCreated: 4,
-  status: "user",
-},
-{
-  id: 3,
-  name: "John Smith",
-  email: "john.smith@example.com",
-  imageUrl: "/assets/images/david.webp",
-  dateJoined: formatDate("2025-01-03"),
-  itineraryCreated: 8,
-  status: "admin",
-},
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    imageUrl: "/assets/images/david.webp",
+    dateJoined: formatDate("2025-01-01"),
+    itineraryCreated: 10,
+    status: "user",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    imageUrl: "/assets/images/david.webp",
+    dateJoined: formatDate("2025-01-02"),
+    itineraryCreated: 4,
+    status: "user",
+  },
+  {
+    id: 3,
+    name: "John Smith",
+    email: "john.smith@example.com",
+    imageUrl: "/assets/images/david.webp",
+    dateJoined: formatDate("2025-01-03"),
+    itineraryCreated: 8,
+    status: "admin",
+  },
 ];

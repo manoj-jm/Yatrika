@@ -64,7 +64,7 @@ declare interface Trip {
   duration: number;
   budget: string;
   travelStyle: string;
-  interest: string;
+  interests: string;
   groupType: string;
   country: string;
   imageUrls: string[];
@@ -138,10 +138,10 @@ declare interface UsersItineraryCount {
   count: number;
 }
 
-declare interface TripsInterest {
+declare interface Tripsinterests {
   imageUrl: string;
   name: string;
-  interest: string;
+  interests: string;
 }
 
 declare interface InfoPillProps {
@@ -152,7 +152,7 @@ declare interface InfoPillProps {
 declare interface TripFormData {
   country: string;
   travelStyle: string;
-  interest: string;
+  interests: string;
   budget: string;
   duration: number;
   groupType: string;

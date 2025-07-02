@@ -42,7 +42,7 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
     duration,
     estimatedPrice,
     groupType,
-    interest,
+    interests,
     itinerary,
     location,
     name,
@@ -51,11 +51,12 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
   } = tripData || {};
 
   const allTrips = loaderData.allTrips as Trip[] | [];
+  console.log("trip 0 :  ", allTrips[0]);
   const pillItems = [
     { text: travelStyle, bg: "!bg-pink-50 !text-pink-500" },
     { text: groupType, bg: "!bg-primary-50 !text-primary-500" },
     { text: budget, bg: "!bg-success-50 !text-success-700" },
-    { text: interest, bg: "!bg-navy-50 !text-navy-500" },
+    { text: interests, bg: "!bg-navy-50 !text-navy-500" },
   ];
 
   const visitTimeAndWeather = [
@@ -118,19 +119,19 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
             </ChipsDirective>
           </ChipListComponent>
 
-          <ul className="flex gap-1 item-center">
+          <ul className="flex gap-1 item-center ml-2">
             {Array(5)
               .fill("null")
               .map((_, index) => (
-                <li key={index}>
+                <li key={index} className="mt-3">
                   <img
                     src="/assets/icons/star.svg"
                     alt="star"
-                    className="size-4"
+                    className="size-5"
                   />
                 </li>
               ))}
-            <li className="ml-1">
+            <li>
               <ChipListComponent>
                 <ChipsDirective>
                   <ChipDirective
@@ -149,11 +150,11 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
               {duration}-day {country} {travelStyle}
             </h3>
             <p>
-              {budget} , {groupType} and {interest}
+              {budget} , {groupType} and {interests}
             </p>
           </article>
 
-          <h2>estimated : {estimatedPrice}</h2>
+          <h2>{estimatedPrice}</h2>
         </section>
 
         <p className="text-sm md:text-lg font-normal text-dark-400">
@@ -202,14 +203,15 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
         <div className="trip-grid ">
           {allTrips.map((trip) => (
             <TripCards
+              key={trip.id}
               id={trip.id}
               name={trip.name}
               imageUrl={trip.imageUrls[0]}
-              location={trip.itinerary?.[0].location ?? "ntg"}
-              tags={[interest, travelStyle].filter(
+              location={trip.itinerary?.[0].location ?? "N/A"}
+              tags={[trip.interests, trip.travelStyle].filter(
                 (tag): tag is string => typeof tag === "string"
               )}
-              price={estimatedPrice ?? ""}
+              price={trip.estimatedPrice ?? ""}
             />
           ))}
         </div>

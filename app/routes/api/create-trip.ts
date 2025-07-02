@@ -22,7 +22,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   try {
     const prompt = `Generate a ${numberOfDays}-day travel itinerary for ${country} based on the following user information:
         Budget: '${budget}'
-        Interests: '${interests}'
+        interests: '${interests}'
         TravelStyle: '${travelStyle}'
         GroupType: '${groupType}'
         Return the itinerary and lowest estimated price in a clean, non-markdown JSON format with the following structure:
@@ -79,14 +79,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
     // const imageUrl = (await imageResponse.json()).results.slice(0, 3)
     //     .map((result: any) => result.urls?.regular || null);
-    console.log("hello image 1 ")
+    console.log("hello image 1 ");
 
     const imageResponse = await fetch(
       `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
     );
-    console.log("hello image 2")
+    console.log("hello image 2");
     const imageJson = await imageResponse.json();
-    console.log("image JSON : ", imageJson)
+    console.log("image JSON : ", imageJson);
     const imageResults = Array.isArray(imageJson.results)
       ? imageJson.results
       : [];

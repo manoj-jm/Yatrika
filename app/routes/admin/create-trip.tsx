@@ -40,7 +40,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const [formData, setFormData] = useState<TripFormData>({
     country: countries[101]?.name || "",
     travelStyle: "",
-    interest: "",
+    interests: "",
     budget: "",
     duration: 0,
     groupType: "",
@@ -58,7 +58,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       !formData.country ||
       !formData.travelStyle ||
       !formData.duration ||
-      !formData.interest ||
+      !formData.interests ||
       !formData.budget ||
       !formData.groupType
     ) {
@@ -89,7 +89,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
           country: formData.country,
           numberOfDays: formData.duration,
           travelStyle: formData.travelStyle,
-          interests: formData.interest,
+          interestss: formData.interests,
           budget: formData.budget,
           groupType: formData.groupType,
           userId: user.$id,
@@ -100,7 +100,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
 
       if (result?.id) {
         navigate(`/trips/${result.id}`);
-        console.log("we are navigated to id page!")
+        console.log("we are navigated to id page!");
       } else {
         console.log("failed to generate trip");
       }
